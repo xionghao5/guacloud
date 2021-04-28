@@ -1,0 +1,24 @@
+server:
+  port: 80              #指定服务端口号
+  registrycentery: 9000   #服务注册中心端口号
+
+spring:
+  application:
+    name: zuulService  #服务名，服务名是唯一的，不同的服务名字不能重复
+
+eureka:
+  client:
+    register-with-eureka: true    #是否需要将自己注册到注册中心
+    fetch-registry: true          #是否向注册中心定时更新自己状态
+    service-url:
+      defaultZone: http://localhost:${server.registrycentery}/eureka/		#指定去哪个服务注册中心进行注册
+
+#配置网关转发详情
+zuul:
+  routes:
+    api-a:
+      path: /s1/**
+      service-id: cloudService1
+    api-b:
+      path: /s2/**
+      service-id: cloudService2
