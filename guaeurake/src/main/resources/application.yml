@@ -1,0 +1,11 @@
+server:
+  port: 9000 #指定服务端口号
+spring:
+  application:
+    name: guaeurake #应用名称
+eureka:
+  client:
+    register-with-eureka: false #是否需要将自己注册到注册中心，因为该工程自己就是服务注册中心，所以无需注册
+    fetch-registry: false       #是否向注册中心定时更新自己状态
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka
