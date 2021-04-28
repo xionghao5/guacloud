@@ -1,5 +1,5 @@
 # guacloud
-a demo of springcloud
+a demo of springcloud.\n
 guashard is a demo of sharding-jdbc
 guazuul is a demo of zuul
 guaeurake is a demo of eurake
