@@ -1,0 +1,42 @@
+CREATE DATABASE `gua` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+
+USE gua;
+
+CREATE TABLE `user_0` (
+	`id` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
+	`name` VARCHAR(50) NOT NULL DEFAULT '0' COLLATE 'utf8_general_ci',
+	`age` SMALLINT(6) NOT NULL DEFAULT '0',
+	`job` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`update_time` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `name` (`name`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `user_1` (
+	`id` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
+	`name` VARCHAR(50) NOT NULL DEFAULT '0' COLLATE 'utf8_general_ci',
+	`age` SMALLINT(6) NOT NULL DEFAULT '0',
+	`job` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`update_time` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `name` (`name`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `user_2` (
+	`id` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
+	`name` VARCHAR(50) NOT NULL DEFAULT '0' COLLATE 'utf8_general_ci',
+	`age` SMALLINT(6) NOT NULL DEFAULT '0',
+	`job` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`update_time` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `name` (`name`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;

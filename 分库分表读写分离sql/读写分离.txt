@@ -1,0 +1,68 @@
+windows下mysql主从复制配置
+参考：https://blog.csdn.net/u010509052/article/details/80449134
+      https://www.cnblogs.com/yeya/p/11878009.html
+1.命令行连接数据库
+mysql -u root -P3307 -p
+
+SHOW MASTER STATUS;
+SHOW slave STATUS;
+
+change master to  master_host='127.0.0.1',master_port=3310,master_user='root',MASTER_PASSWORD='888',master_log_file='mysql-bin.000001',MASTER_LOG_POS=120;
+
+START SLAVE;
+SHOW SLAVE STATUS;
+SHOW DATABASES;
+
+2.my.ini的配置
+==========主库my.ini,多了一个log-bin的配置==========
+[mysql]
+# 设置mysql客户端默认字符集
+default-character-set=utf8
+[mysqld]
+#设置3306端口
+port = 3307
+# 设置mysql的安装目录
+# 设置mysql数据库的数据的存放目录
+# 允许最大连接数
+max_connections=200
+# 服务端使用的字符集默认为8比特编码的latin1字符集
+character-set-server=utf8
+# 创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB
+#=========主从复制关键配置=====================
+server_id=1 #主库和从库需要不一致,配一个唯一的ID编号，1至32。 手动设定
+log-bin=mysql-bin #二进制文件存放路径,存放在根目录data
+#binlog-do-db=test #需要复制的库,多个库用逗号隔开,如果此项不配置所有主库都参与复制
+#binlog-ignore-db=mysql #不需要复制的库，和上项同理
+#=========主从复制关键配置=====================
+
+==========从库my.ini,没有log-bin的配置==========
+[mysql]
+# 设置mysql客户端默认字符集
+default-character-set=utf8
+[mysqld]
+#设置3306端口
+port = 3308
+# 设置mysql的安装目录
+# 设置mysql数据库的数据的存放目录
+# 允许最大连接数
+max_connections=200
+# 服务端使用的字符集默认为8比特编码的latin1字符集
+character-set-server=utf8
+# 创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB
+#========主从复制关键配置======================
+server_id=2 #主库和从库需要不一致
+#binlog-do-db=test #和主库说明一致
+#binlog-ignore-db=mysql #和主库说明一致
+#========主从复制关键配置======================
+
+
+3.从库复制时报错
+Fatal error: The slave I/O thread stops because master and slave have equal MySQL server UUIDs; these UUIDs must be different for replication to WORK.
+
+
+因为从库是直接复制的主库，所以需要在启动前把auto.cnf这个文件删除，启动后会新生成一个auto.cnf
+参考 https://blog.csdn.net/lxypeter521/article/details/81866115
+
+
