@@ -1,5 +1,6 @@
 package com.gua.guashard.modules.user.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.gua.guashard.modules.user.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<User> {
 
+    IPage<User> nextPage(Integer pageSize, Long lastId);
+
+    User selectOneById(Long id);
+
+    IPage<User> test();
 }
